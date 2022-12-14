@@ -1,0 +1,40 @@
+--- "povray-3.8.0-beta.2\\source\\frontend\\processrenderoptions.cpp"	2022-12-14 17:13:48.712590900 +0400
++++ "povdump-3.8.0-beta.2\\source\\frontend\\processrenderoptions.cpp"	2022-12-14 12:48:00.194418000 +0400
+@@ -228,6 +228,10 @@ struct ProcessOptions::INI_Parser_Table
+     { "Width",               kPOVAttrib_Width,              kPOVMSType_Int },
+     { "Work_Threads",        kPOVAttrib_MaxRenderThreads,   kPOVMSType_Int },
+ 
++    { "NoRender",            kPOVAttrib_NoRender,           kPOVMSType_Bool },
++    { "Dump_File_Name",      kPOVAttrib_DumpFile,           kPOVMSType_UCS2String },
++    { "TmpCfg_File_Name",    kPOVAttrib_TmpCfgName,         kPOVMSType_UCS2String },
++
+     { nullptr, 0, 0 }
+ };
+ 
+@@ -261,6 +265,8 @@ struct ProcessOptions::Cmd_Parser_Table
+     { "CC",  kNoParameter,                  kNoParameter,           kPOVAttrib_BackupTrace },
+     { "C",   kNoParameter,                  kNoParameter,           kPOVAttrib_ContinueTrace },
+ 
++    { "DF",   kPOVAttrib_DumpFile,          kPOVMSType_UCS2String,  kNoParameter },
++
+     { "D",   kPOVAttrib_Display,            kUseSpecialHandler,     kPOVAttrib_Display,             kCmdOptFlag_Optional },
+ 
+     { "EC",  kPOVAttrib_Right,              kPOVMSType_Float,       kNoParameter },
+@@ -302,6 +308,8 @@ struct ProcessOptions::Cmd_Parser_Table
+     { "MI",  kPOVAttrib_MaxImageBufferMem,  kPOVMSType_Int,         kNoParameter },
+     { "MV",  kPOVAttrib_Version,            kPOVMSType_Float,       kNoParameter },
+ 
++    { "NR",  kNoParameter,                  kNoParameter,           kPOVAttrib_NoRender },
++
+     { "O",   kPOVAttrib_OutputFile,         kPOVMSType_UCS2String,  kNoParameter },
+ 
+     { "P",   kNoParameter,                  kNoParameter,           kPOVAttrib_PauseWhenDone },
+@@ -326,6 +334,8 @@ struct ProcessOptions::Cmd_Parser_Table
+     { "STP", kPOVAttrib_FrameStep,          kPOVMSType_Int,         kNoParameter },
+     { "SU",  kNoParameter,                  kNoParameter,           kPOVAttrib_SplitUnions },
+ 
++    { "TC",  kPOVAttrib_TmpCfgName,         kPOVMSType_UCS2String,  kNoParameter },
++
+     { "TH",  kPOVAttrib_DitherMethod,       kUseSpecialHandler,     kPOVAttrib_Dither,              kCmdOptFlag_Optional },
+ 
+     { "UA",  kNoParameter,                  kNoParameter,           kPOVAttrib_OutputAlpha },

@@ -1,0 +1,13 @@
+--- "povray-3.8.0-beta.2\\source\\povms\\povmsid.h"	2022-12-14 17:13:48.606184900 +0400
++++ "povdump-3.8.0-beta.2\\source\\povms\\povmsid.h"	2022-12-14 14:11:19.818844900 +0400
+@@ -651,6 +651,10 @@ enum
+     kPOVAttrib_EndColumn             = kPOVAttrib_Right,
+     kPOVAttrib_StartRow              = kPOVAttrib_Top,
+     kPOVAttrib_EndRow                = kPOVAttrib_Bottom
++	,
++	kPOVAttrib_NoRender              = 'NoRe',
++	kPOVAttrib_DumpFile              = 'DuFi',
++	kPOVAttrib_TmpCfgName            = 'TcNa'
+ };
+ 
+ enum
