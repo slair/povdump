@@ -1,11 +1,14 @@
 @echo off
 
-::~ set POVVERSION=
-
+:: sources folder
 set ORG=povray-3.8.0-beta.2
 
+:: name installed
+set POVVERSIONSYS=v3.8-beta
+set POVDUMP_BIN_DIR=C:\apps\POV-Ray\%POVVERSIONSYS%\bin
+
+:: where build was
 set MY=povdump-3.8.0-beta.2
-set POVDUMP_BIN_DIR=C:\apps\POV-Ray\v3.8-beta\bin
 
 set PATCHES_DIR=patches
 
@@ -31,8 +34,11 @@ goto end
 
 :success
 
-ln bin64/pvengine64.exe c:\apps\POV-Ray\v3.8-beta\bin\povdump64.exe
-ln bin64/cmedit64.dll c:\apps\POV-Ray\v3.8-beta\bin\cmedit64.dll
+del c:\apps\POV-Ray\%POVVERSIONSYS%\bin\povdump64.exe > NUL
+ln bin64/pvengine64.exe c:\apps\POV-Ray\%POVVERSIONSYS%\bin\povdump64.exe
+
+del c:\apps\POV-Ray\%POVVERSIONSYS%\bin\cmedit64.dll > NUL
+ln bin64/cmedit64.dll c:\apps\POV-Ray\%POVVERSIONSYS%\bin\cmedit64.dll
 
 echo BUILD SUCCESSFUL!!!
 
