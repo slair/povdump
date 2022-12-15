@@ -14,6 +14,9 @@ call :make_patch
 set PFN=source\frontend\processrenderoptions.cpp
 call :make_patch
 
+set PFN=vfe\vfe.cpp
+call :make_patch
+
 exit /b 0
 :make_patch
 set PATCH_FILE_NAME=%PFN:\=_%.patch
