@@ -42,8 +42,7 @@ ln bin64/cmedit64.dll c:\apps\POV-Ray\%POVVERSIONSYS%\bin\cmedit64.dll
 
 echo BUILD SUCCESSFUL!!!
 
-cd C:\slair\work.local\povray\my-blocks
-povdump64.exe /EXIT +NR +Imain.pov
+povdump64.exe /EXIT +NR +Itest.pov
 
 :end
 popd

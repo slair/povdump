@@ -17,6 +17,9 @@ call :make_patch
 set PFN=vfe\vfe.cpp
 call :make_patch
 
+set PFN=source\core\scene\object.h
+call :make_patch
+
 exit /b 0
 :make_patch
 set PATCH_FILE_NAME=%PFN:\=_%.patch
