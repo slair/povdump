@@ -2,6 +2,7 @@ povdump-3.8.0-beta.2
 povray-3.8.0-beta.2
 build-povray-qmake.7z
 povray-3.8.0-beta.2.zip
+*.dump
 
 # Prerequisites
 *.d

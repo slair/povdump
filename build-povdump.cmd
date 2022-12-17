@@ -44,7 +44,6 @@ ln bin64/cmedit64.dll c:\apps\POV-Ray\%POVVERSIONSYS%\bin\cmedit64.dll
 
 echo BUILD SUCCESSFUL!!!
 
-povdump64.exe /EXIT +NR +Itest.pov
-
 :end
 popd
+povdump64.exe /EXIT +NR +Itest.pov

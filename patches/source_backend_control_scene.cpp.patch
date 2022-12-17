@@ -1,5 +1,5 @@
 --- "povray-3.8.0-beta.2\\source\\backend\\control\\scene.cpp"	2021-08-09 05:11:00.000000000 +0400
-+++ "povdump-3.8.0-beta.2\\source\\backend\\control\\scene.cpp"	2022-12-17 23:54:43.560553600 +0400
++++ "povdump-3.8.0-beta.2\\source\\backend\\control\\scene.cpp"	2022-12-17 23:58:00.089115400 +0400
 @@ -37,6 +37,7 @@
  
  // Unit header file must be the first file included within POV-Ray *.cpp files (pulls in config)
@@ -55,7 +55,7 @@
  {
      parserTasks.Stop();
  
-+	if (parseOptions.TryGetBool(kPOVAttrib_NoRender, false))
++	if (sceneData->dump_file != nullptr)
 +	{
 +		fclose(sceneData->dump_file);
 +	}
