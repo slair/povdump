@@ -1,14 +1,15 @@
 --- "povray-3.8.0-beta.2\\source\\core\\scene\\object.h"	2021-08-09 05:11:00.000000000 +0400
-+++ "povdump-3.8.0-beta.2\\source\\core\\scene\\object.h"	2022-12-17 01:15:40.902344500 +0400
-@@ -44,6 +44,7 @@
++++ "povdump-3.8.0-beta.2\\source\\core\\scene\\object.h"	2022-12-17 23:31:59.047037900 +0400
+@@ -44,6 +44,8 @@
  // POV-Ray header files (core module)
  #include "core/bounding/boundingbox.h"
  #include "core/material/texture.h"
 +#include "core/material/pigment.h"
++#include "parser/dump.h"
  
  namespace pov_base
  {
-@@ -184,6 +185,7 @@ class ObjectBase
+@@ -184,6 +186,7 @@ class ObjectBase
          double RadiosityImportance;
          bool RadiosityImportanceSet;
          unsigned int Flags;
@@ -16,7 +17,7 @@
  
  #ifdef OBJECT_DEBUG_HELPER
          ObjectDebugHelper Debug;
-@@ -196,6 +198,7 @@ class ObjectBase
+@@ -196,6 +199,7 @@ class ObjectBase
              Ph_Density(0), RadiosityImportance(0.0), RadiosityImportanceSet(false), Flags(0)
          {
              Make_BBox(BBox, -BOUND_HUGE/2.0, -BOUND_HUGE/2.0, -BOUND_HUGE/2.0, BOUND_HUGE, BOUND_HUGE, BOUND_HUGE);
@@ -24,7 +25,7 @@
          }
  
          /// Construct object as copy of existing one.
-@@ -221,7 +224,46 @@ class ObjectBase
+@@ -221,7 +225,57 @@ class ObjectBase
                  o.Clip.clear();
                  o.LLights.clear();
              }
@@ -37,25 +38,35 @@
 +			{
 +				if (IsBaseObject)
 +				{
-+					fwrite("BASE",4,1,df);
++					DUMPTAG(df, "BASE");
++					//~ fwrite("BASE",4,1,df);
 +				}
 +				if (Trans)
 +				{
-+					fwrite("TRNS",4,1,df);
-+					fwrite(Trans->matrix, sizeof(Trans->matrix), 1, df);
++					DUMPTAG(df, "TRNS");
++					//~ fwrite("TRNS",4,1,df);
++					DUMP(df, Trans->matrix);
++					//~ fwrite(Trans->matrix, sizeof(Trans->matrix), 1, df);
 +				}
 +				else
 +				{
-+					fwrite("\x00\x00\x00\x00",4,1,df);
++					DUMPTAG(df, "\x00\x00\x00\x00");
++					//~ fwrite("\x00\x00\x00\x00",4,1,df);
 +				}
 +
-+				fwrite("BBOX",4,1,df);
-+				fwrite(&BBox.lowerLeft, sizeof(BBox.lowerLeft), 1, df);
++				DUMPTAG(df, "BBOX");
++				//~ fwrite("BBOX",4,1,df);
++				DUMP(df, BBox.lowerLeft);
++				//~ fwrite(&BBox.lowerLeft, sizeof(BBox.lowerLeft), 1, df);
 +				if (Texture)
 +				{
-+					fwrite("COLR", 4, 1, df);
-+					fwrite(&(Texture->Pigment->colour.colour())
-+						, sizeof(Texture->Pigment->colour.colour()), 1, df);
++					DUMPTAG(df, "COLR");
++					//~ fwrite("COLR", 4, 1, df);
++					DUMP(df, Texture->Pigment->colour.colour());
++					DUMP(df, Texture->Pigment->colour.filter());
++					DUMP(df, Texture->Pigment->colour.transm());
++					//~ fwrite(&(Texture->Pigment->colour.colour())
++						//~ , sizeof(Texture->Pigment->colour.colour()), 1, df);
 +					//~ fwrite(&(Texture->Pigment->colour.filter())
 +						//~ , sizeof(Texture->Pigment->colour.filter()), 1, df);
 +					//~ fwrite(&(Texture->Pigment->colour.transm())
@@ -63,7 +74,8 @@
 +				}
 +				else
 +				{
-+					fwrite("\x00\x00\x00\x00",4,1,df);
++					DUMPTAG(df, "\x00\x00\x00\x00");
++					//~ fwrite("\x00\x00\x00\x00",4,1,df);
 +				}
 +			}
 +		};

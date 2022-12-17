@@ -20,6 +20,8 @@ copy %ORG% %MY%
 call apply-patch.cmd
 )
 
+rem call make-patch.cmd
+
 pushd %MY%\windows\vs2015
 
 if not defined VSCMD_VER call vcvars64.bat

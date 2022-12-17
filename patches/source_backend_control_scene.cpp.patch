@@ -1,0 +1,65 @@
+--- "povray-3.8.0-beta.2\\source\\backend\\control\\scene.cpp"	2021-08-09 05:11:00.000000000 +0400
++++ "povdump-3.8.0-beta.2\\source\\backend\\control\\scene.cpp"	2022-12-17 23:31:10.857552900 +0400
+@@ -37,6 +37,7 @@
+ 
+ // Unit header file must be the first file included within POV-Ray *.cpp files (pulls in config)
+ #include "backend/control/scene.h"
++#include "parser/dump.h"
+ 
+ // Boost header files
+ #include <boost/bind.hpp>
+@@ -105,6 +106,42 @@ void Scene::StartParser(POVMS_Object& pa
+ 
+     sceneData->warningLevel = clip(parseOptions.TryGetInt(kPOVAttrib_WarningLevel, 9), 0, 9);
+ 
++	if (parseOptions.TryGetBool(kPOVAttrib_NoRender, false))
++	{
++		sceneData->dump_file = fopen(
++			POVMS_UCS2toASCIIString(
++				parseOptions.TryGetUCS2String(
++					kPOVAttrib_DumpFile,
++					SCENE_DUMP_NAME
++				)
++			).c_str(), "w"
++		);
++
++		unsigned char tmpsizes = sizeof(short int);
++		DUMP(tmpsizes, sceneData->dump_file);
++		//~ fwrite(&tmpsizes, 1, 1, sceneData->dump_file);
++
++		tmpsizes = sizeof(int);
++		DUMP(tmpsizes, sceneData->dump_file);
++		//~ fwrite(&tmpsizes, 1, 1, sceneData->dump_file);
++
++		tmpsizes = sizeof(float);
++		DUMP(tmpsizes, sceneData->dump_file);
++		//~ fwrite(&tmpsizes, 1, 1, sceneData->dump_file);
++
++		tmpsizes = sizeof(double);
++		DUMP(tmpsizes, sceneData->dump_file);
++		//~ fwrite(&tmpsizes, 1, 1, sceneData->dump_file);
++
++		DUMPTAG(sceneData->dump_file, "SCNE");
++
++		sceneData->tmpcfg_name = POVMS_UCS2toASCIIString(
++			parseOptions.TryGetUCS2String(
++				kPOVAttrib_DumpFile, TMPCFG_NAME
++			)
++		).c_str();
++	}
++
+     sceneData->inputFile = parseOptions.TryGetUCS2String(kPOVAttrib_InputFile, "object.pov");
+     sceneData->headerFile = parseOptions.TryGetUCS2String(kPOVAttrib_IncludeHeader, "");
+ 
+@@ -199,6 +236,11 @@ void Scene::StopParser()
+ {
+     parserTasks.Stop();
+ 
++	if (parseOptions.TryGetBool(kPOVAttrib_NoRender, false))
++	{
++		fclose(sceneData->dump_file);
++	}
++
+     RenderBackend::SendSceneFailedResult(sceneData->sceneId, kUserAbortErr, sceneData->frontendAddress);
+ }
+ 

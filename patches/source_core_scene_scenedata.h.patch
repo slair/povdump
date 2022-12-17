@@ -1,0 +1,12 @@
+--- "povray-3.8.0-beta.2\\source\\core\\scene\\scenedata.h"	2021-08-09 05:11:00.000000000 +0400
++++ "povdump-3.8.0-beta.2\\source\\core\\scene\\scenedata.h"	2022-12-17 22:38:07.654789200 +0400
+@@ -226,6 +226,9 @@ class SceneData
+         unsigned int numberOfFiniteObjects;
+         unsigned int numberOfInfiniteObjects;
+ 
++		FILE* dump_file;
++		string tmpcfg_name;
++
+         // BSP statistics // TODO - not sure if this is the best place for stats
+         unsigned int nodes, splitNodes, objectNodes, emptyNodes, maxObjects, maxDepth, aborts;
+         float averageObjects, averageDepth, averageAborts, averageAbortObjects;
