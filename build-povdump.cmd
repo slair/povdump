@@ -28,7 +28,7 @@ del %MY%\windows\vs2015\bin64\cmedit64.dll > NUL 2>&1
 pushd %MY%\windows\vs2015
 
 if not defined VSCMD_VER call vcvars64.bat
-MSBuild povray.sln /p:Configuration=Release /p:Platform="x64"
+MSBuild povray.sln -p:Configuration=Release -p:Platform="x64" -nologo
 
 del %POVDUMP_BIN_DIR%\povdump64.exe > NUL 2>&1
 ln bin64/pvengine64.exe %POVDUMP_BIN_DIR%\povdump64.exe > NUL 2>&1
@@ -42,7 +42,7 @@ del scene.dump > NUL 2>&1
 del povdump.log > NUL 2>&1
 
 if exist %POVDUMP_BIN_DIR%\povdump64.exe (
-povdump64.exe /EXIT +NR +Itest.pov
+povdump64.exe /EXIT +NRE +Itest.pov
 type scene.dump | hexdump.lua
 type povdump.log
 )

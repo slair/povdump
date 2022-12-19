@@ -14,6 +14,9 @@ call :make_patch
 set PFN=source\base\build.h
 call :make_patch
 
+::~ set PFN=windows\povconfig\syspovconfig.h
+::~ call :make_patch
+
 set PFN=source\povms\povmsid.h
 call :make_patch
 
