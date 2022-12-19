@@ -8,6 +8,9 @@ set PATCHES_DIR=patches
 set PFN=source\parser\dump.h
 call :make_patch
 
+set PFN=source\parser\dump.cpp
+call :make_patch
+
 set PFN=source\base\build.h
 call :make_patch
 
@@ -17,10 +20,10 @@ call :make_patch
 set PFN=source\frontend\processrenderoptions.cpp
 call :make_patch
 
-set PFN=vfe\vfe.cpp
+set PFN=source\parser\parser.cpp
 call :make_patch
 
-set PFN=source\core\scene\object.h
+set PFN=windows\vs2015\povparser.vcxproj
 call :make_patch
 
 set PFN=source\core\scene\scenedata.h
@@ -29,8 +32,8 @@ call :make_patch
 set PFN=source\core\scene\scenedata.cpp
 call :make_patch
 
-set PFN=source\backend\control\scene.h
-call :make_patch
+::~ set PFN=source\backend\control\scene.h
+::~ call :make_patch
 
 set PFN=source\backend\control\scene.cpp
 call :make_patch

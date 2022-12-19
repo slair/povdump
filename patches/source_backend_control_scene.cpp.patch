@@ -1,5 +1,5 @@
 --- "povray-3.8.0-beta.2\\source\\backend\\control\\scene.cpp"	2021-08-09 05:11:00.000000000 +0400
-+++ "povdump-3.8.0-beta.2\\source\\backend\\control\\scene.cpp"	2022-12-17 23:58:00.089115400 +0400
++++ "povdump-3.8.0-beta.2\\source\\backend\\control\\scene.cpp"	2022-12-18 20:31:22.120315400 +0400
 @@ -37,6 +37,7 @@
  
  // Unit header file must be the first file included within POV-Ray *.cpp files (pulls in config)
@@ -8,12 +8,13 @@
  
  // Boost header files
  #include <boost/bind.hpp>
-@@ -105,6 +106,42 @@ void Scene::StartParser(POVMS_Object& pa
+@@ -105,6 +106,43 @@ void Scene::StartParser(POVMS_Object& pa
  
      sceneData->warningLevel = clip(parseOptions.TryGetInt(kPOVAttrib_WarningLevel, 9), 0, 9);
  
 +	if (parseOptions.TryGetBool(kPOVAttrib_NoRender, false))
 +	{
++		Log("Open dump file");
 +		sceneData->dump_file = fopen(
 +			POVMS_UCS2toASCIIString(
 +				parseOptions.TryGetUCS2String(
@@ -51,15 +52,30 @@
      sceneData->inputFile = parseOptions.TryGetUCS2String(kPOVAttrib_InputFile, "object.pov");
      sceneData->headerFile = parseOptions.TryGetUCS2String(kPOVAttrib_IncludeHeader, "");
  
-@@ -199,6 +236,11 @@ void Scene::StopParser()
+@@ -199,6 +237,13 @@ void Scene::StopParser()
  {
      parserTasks.Stop();
  
 +	if (sceneData->dump_file != nullptr)
 +	{
++		Log("Close dump file at StopParser()");
 +		fclose(sceneData->dump_file);
++		sceneData->dump_file = nullptr;
 +	}
 +
      RenderBackend::SendSceneFailedResult(sceneData->sceneId, kUserAbortErr, sceneData->frontendAddress);
  }
  
+@@ -320,6 +365,12 @@ void Scene::SendStatistics(TaskQueue&)
+ 
+ void Scene::SendDoneMessage(TaskQueue&)
+ {
++	if (sceneData->dump_file != nullptr)
++	{
++		Log("Close dump file at SendDoneMessage(TaskQueue&)");
++		fclose(sceneData->dump_file);
++		sceneData->dump_file = nullptr;
++	}
+     POVMS_Message doneMessage(kPOVObjectClass_ResultData, kPOVMsgClass_SceneOutput, kPOVMsgIdent_Done);
+     doneMessage.SetInt(kPOVAttrib_SceneId, sceneData->sceneId);
+     doneMessage.SetSourceAddress(sceneData->backendAddress);

@@ -1,0 +1,18 @@
+--- "povray-3.8.0-beta.2\\windows\\vs2015\\povparser.vcxproj"	2021-08-09 05:11:00.000000000 +0400
++++ "povdump-3.8.0-beta.2\\windows\\vs2015\\povparser.vcxproj"	2022-12-18 21:53:15.195331000 +0400
+@@ -400,6 +400,7 @@
+   </ItemDefinitionGroup>
+   <ItemGroup>
+     <ClCompile Include="..\..\source\parser\fncode.cpp" />
++    <ClCompile Include="..\..\source\parser\dump.cpp" />
+     <ClCompile Include="..\..\source\parser\parser.cpp" />
+     <ClCompile Include="..\..\source\parser\parser_expressions.cpp" />
+     <ClCompile Include="..\..\source\parser\parser_functions.cpp" />
+@@ -420,6 +421,7 @@
+   </ItemGroup>
+   <ItemGroup>
+     <ClInclude Include="..\..\source\parser\fncode.h" />
++    <ClInclude Include="..\..\source\parser\dump.h" />
+     <ClInclude Include="..\..\source\parser\parser.h" />
+     <ClInclude Include="..\..\source\parser\reservedwords.h" />
+     <ClInclude Include="..\..\source\parser\configparser.h" />

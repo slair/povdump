@@ -1,0 +1,23 @@
+--- "povray-3.8.0-beta.2\\source\\parser\\dump.cpp"	1970-01-01 04:00:00.000000000 +0400
++++ "povdump-3.8.0-beta.2\\source\\parser\\dump.cpp"	2022-12-18 21:48:06.121018000 +0400
+@@ -0,0 +1,20 @@
++#include "parser/dump.h"
++
++void Log(const char* msg) {
++	FILE* log = fopen("povdump.log", "a");
++	if (!log) return;
++
++    time_t tt = time(NULL);
++    tm* t = localtime(&tt);
++
++    fprintf(log, "%02d.%02d.%02d %02d:%02d:%02d\t%s\n",
++		t->tm_mday, t->tm_mon + 1, t->tm_year % 100,
++		t->tm_hour, t->tm_min, t->tm_sec, msg);
++
++    fclose(log);
++};
++
++void Log(string msg) {
++	Log((char*) msg.c_str());
++};
++

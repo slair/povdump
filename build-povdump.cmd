@@ -20,30 +20,43 @@ copy %ORG% %MY%
 call apply-patch.cmd
 )
 
-rem call make-patch.cmd
+call make-patch.cmd
+
+del %MY%\windows\vs2015\bin64\pvengine64.exe > NUL 2>&1
+del %MY%\windows\vs2015\bin64\cmedit64.dll > NUL 2>&1
 
 pushd %MY%\windows\vs2015
 
 if not defined VSCMD_VER call vcvars64.bat
-
 MSBuild povray.sln /p:Configuration=Release /p:Platform="x64"
-if errorlevel 0 goto success
+
+del %POVDUMP_BIN_DIR%\povdump64.exe > NUL 2>&1
+ln bin64/pvengine64.exe %POVDUMP_BIN_DIR%\povdump64.exe > NUL 2>&1
+
+del %POVDUMP_BIN_DIR%\cmedit64.dll > NUL 2>&1
+ln bin64/cmedit64.dll %POVDUMP_BIN_DIR%\cmedit64.dll > NUL 2>&1
+
+popd
+
+del scene.dump > NUL 2>&1
+del povdump.log > NUL 2>&1
+
+if exist %POVDUMP_BIN_DIR%\povdump64.exe (
+povdump64.exe /EXIT +NR +Itest.pov
+type scene.dump | xd.lua
+type povdump.log
+)
+
+if not exist scene.dump (
+echo.
 echo ===================
 echo ^| BUILD FAILED!!! ^|
 echo ===================
 ::~ play failed sound
-goto end
+goto :end
+)
 
-:success
-
-del c:\apps\POV-Ray\%POVVERSIONSYS%\bin\povdump64.exe > NUL
-ln bin64/pvengine64.exe c:\apps\POV-Ray\%POVVERSIONSYS%\bin\povdump64.exe
-
-del c:\apps\POV-Ray\%POVVERSIONSYS%\bin\cmedit64.dll > NUL
-ln bin64/cmedit64.dll c:\apps\POV-Ray\%POVVERSIONSYS%\bin\cmedit64.dll
-
+echo.
 echo BUILD SUCCESSFUL!!!
 
 :end
-popd
-povdump64.exe /EXIT +NR +Itest.pov
