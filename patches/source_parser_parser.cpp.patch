@@ -1,5 +1,5 @@
 --- "povray-3.8.0-beta.2\\source\\parser\\parser.cpp"	2021-08-09 05:11:00.000000000 +0400
-+++ "povdump-3.8.0-beta.2\\source\\parser\\parser.cpp"	2022-12-19 17:30:50.532636000 +0400
++++ "povdump-3.8.0-beta.2\\source\\parser\\parser.cpp"	2022-12-19 18:02:25.499924400 +0400
 @@ -37,7 +37,7 @@
  
  // Unit header file must be the first file included within POV-Ray *.cpp files (pulls in config)
@@ -32,17 +32,18 @@
      FOG *Fog, *Next_Fog;
      RAINBOW *Rainbow, *Next_Rainbow;
  
-@@ -10336,6 +10345,9 @@ void Parser::Link_To_Frame(ObjectPtr Obj
+@@ -10336,6 +10345,10 @@ void Parser::Link_To_Frame(ObjectPtr Obj
          (dynamic_cast<CSGMerge *>(Object) != nullptr))
      {
          Link(Object, sceneData->objects);
-+		Log("link 1");
-+		//~ if (sceneData->dump_file)
-+			//~ Object->Dump(sceneData->dump_file, GetParserDataPtr());
++		if (sceneData->dump_file) {
++			Log("Dump object " + std::to_string(Object->Type));
++			Object->Dump(sceneData->dump_file, GetParserDataPtr());
++		}
          return;
      }
  
-@@ -10352,6 +10364,7 @@ void Parser::Link_To_Frame(ObjectPtr Obj
+@@ -10352,6 +10365,7 @@ void Parser::Link_To_Frame(ObjectPtr Obj
      if((reinterpret_cast<CSGUnion *>(Object))->do_split == false)
      {
          Link(Object, sceneData->objects);
@@ -50,7 +51,7 @@
          return;
      }
  
-@@ -10380,6 +10393,7 @@ void Parser::Link_To_Frame(ObjectPtr Obj
+@@ -10380,6 +10394,7 @@ void Parser::Link_To_Frame(ObjectPtr Obj
              if (finite)
                  Warning("CSG union unnecessarily bounded.");
              Link(Object, sceneData->objects);
@@ -58,7 +59,7 @@
              return;
          }
  
-@@ -10395,6 +10409,7 @@ void Parser::Link_To_Frame(ObjectPtr Obj
+@@ -10395,6 +10410,7 @@ void Parser::Link_To_Frame(ObjectPtr Obj
      }
  
      (reinterpret_cast<CSG *>(Object))->children.clear();

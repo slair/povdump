@@ -1,0 +1,32 @@
+--- "povray-3.8.0-beta.2\\source\\core\\scene\\object.cpp"	2021-08-09 05:11:00.000000000 +0400
++++ "povdump-3.8.0-beta.2\\source\\core\\scene\\object.cpp"	2022-12-19 23:19:14.523790900 +0400
+@@ -933,6 +933,29 @@ bool ObjectBase::IsOpaque() const
+            ((Interior_Texture == nullptr) || Test_Opacity(Interior_Texture));
+ }
+ 
++void ObjectBase::Dump(FILE* df, TraceThreadData* Thread) const
++{
++	if (df) {
++		Log("IsBaseObject = '" + std::to_string(IsBaseObject) + "'");
++		if (IsBaseObject == true) {
++			DUMPTAG(df, "BASE");
++			Log("BASE");
++		}
++		if (Trans) {
++			DUMPTAG(df, "TRNS");
++			DUMP(df, Trans->matrix);
++		} else DUMPTAG(df, "\x00\x00\x00\x00");
++		DUMPTAG(df, "BBOX");
++		DUMP(df, BBox.lowerLeft);
++		BBoxVector3d upperRight = BBox.lowerLeft + BBox.size;
++		DUMP(df, upperRight);
++		if (Texture) {
++			DUMPTAG(df, "COLR");
++			DUMP(df, Texture->Pigment->colour);
++		} else DUMPTAG(df, "\x00\x00\x00\x00");
++	}
++}
++
+ void ContainedByBox::ComputeBBox(BoundingBox& rBbox) const
+ {
+     rBbox.lowerLeft = BBoxVector3d(corner1);

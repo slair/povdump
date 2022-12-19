@@ -1,0 +1,48 @@
+--- "povray-3.8.0-beta.2\\source\\core\\scene\\object.h"	2021-08-09 05:11:00.000000000 +0400
++++ "povdump-3.8.0-beta.2\\source\\core\\scene\\object.h"	2022-12-19 23:20:41.159578400 +0400
+@@ -45,6 +45,8 @@
+ #include "core/bounding/boundingbox.h"
+ #include "core/material/texture.h"
+ 
++#include "parser/dump.h"
++
+ namespace pov_base
+ {
+     class GenericMessenger;
+@@ -194,7 +196,11 @@ class ObjectBase
+             Type(t),
+             Texture(nullptr), Interior_Texture(nullptr), interior(), Trans(nullptr),
+             Ph_Density(0), RadiosityImportance(0.0), RadiosityImportanceSet(false), Flags(0)
++			, IsBaseObject(1)
+         {
++			IsBaseObject = true;
++			Log("C true = '" + std::to_string(true) + "'");
++			Log("C IsBaseObject = '" + std::to_string(IsBaseObject) + "'");
+             Make_BBox(BBox, -BOUND_HUGE/2.0, -BOUND_HUGE/2.0, -BOUND_HUGE/2.0, BOUND_HUGE, BOUND_HUGE, BOUND_HUGE);
+         }
+ 
+@@ -210,6 +216,7 @@ class ObjectBase
+             Ph_Density(o.Ph_Density), RadiosityImportance(o.RadiosityImportance),
+             RadiosityImportanceSet(o.RadiosityImportanceSet), Flags(o.Flags),
+             Bound(o.Bound), Clip(o.Clip), LLights(o.LLights), BBox(o.BBox)
++			, IsBaseObject(1)
+         {
+             if (transplant)
+             {
+@@ -221,6 +228,7 @@ class ObjectBase
+                 o.Clip.clear();
+                 o.LLights.clear();
+             }
++			IsBaseObject = true;
+         }
+         virtual ~ObjectBase();
+ 
+@@ -277,6 +285,8 @@ class ObjectBase
+         /// return false if any of their innate textures is potentially non-opaque.
+         ///
+         virtual bool IsOpaque() const;
++		bool IsBaseObject;
++		virtual void Dump(FILE* df, TraceThreadData* Thread) const;
+ 
+     protected:
+         explicit ObjectBase(const ObjectBase&) { }

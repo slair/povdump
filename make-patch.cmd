@@ -32,6 +32,12 @@ call :make_patch
 set PFN=source\core\scene\scenedata.cpp
 call :make_patch
 
+set PFN=source\core\scene\object.h
+call :make_patch
+
+set PFN=source\core\scene\object.cpp
+call :make_patch
+
 ::~ set PFN=source\backend\control\scene.h
 ::~ call :make_patch
 

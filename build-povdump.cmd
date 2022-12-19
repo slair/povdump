@@ -43,7 +43,7 @@ del povdump.log > NUL 2>&1
 
 if exist %POVDUMP_BIN_DIR%\povdump64.exe (
 povdump64.exe /EXIT +NR +Itest.pov
-type scene.dump | xd.lua
+type scene.dump | hexdump.lua
 type povdump.log
 )
 
@@ -52,11 +52,12 @@ echo.
 echo ===================
 echo ^| BUILD FAILED!!! ^|
 echo ===================
-::~ play failed sound
+mpv.com %HOME%\share\sounds\trombone-sad.wav > NUL 2>&1
 goto :end
 )
 
 echo.
 echo BUILD SUCCESSFUL!!!
+mpv.com %HOME%\share\sounds\jingl-victory.mp3 > NUL 2>&1
 
 :end
