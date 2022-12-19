@@ -1,8 +1,4 @@
-18.12.22 22:16:12	Open dump file
-18.12.22 22:16:12	Frame_Init()
-18.12.22 22:16:12	link 1
-18.12.22 22:16:12	Close dump file at SendDoneMessage(TaskQueue&)
-18.12.22 22:25:36	Open dump file
-18.12.22 22:25:36	Frame_Init()
-18.12.22 22:25:36	link 1
-18.12.22 22:25:37	Close dump file at SendDoneMessage(TaskQueue&)
+19.12.22 17:42:54	Open dump file
+19.12.22 17:42:54	Frame_Init()
+19.12.22 17:42:54	link 1
+19.12.22 17:42:54	Close dump file at SendDoneMessage(TaskQueue&)
