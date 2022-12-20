@@ -41,10 +41,14 @@ call :make_patch
 set PFN=source\core\scene\object.cpp
 call :make_patch
 
-::~ set PFN=source\backend\control\scene.h
-::~ call :make_patch
-
 set PFN=source\backend\control\scene.cpp
+call :make_patch
+
+
+set PFN=source\core\shape\sphere.cpp
+call :make_patch
+
+set PFN=source\core\shape\sphere.h
 call :make_patch
 
 exit /b 0

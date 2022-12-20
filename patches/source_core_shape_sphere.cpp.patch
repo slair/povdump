@@ -1,0 +1,28 @@
+--- "povray-3.8.0-beta.2\\source\\core\\shape\\sphere.cpp"	2021-08-09 05:11:00.000000000 +0400
++++ "povdump-3.8.0-beta.2\\source\\core\\shape\\sphere.cpp"	2022-12-20 23:06:01.158095500 +0400
+@@ -546,7 +546,9 @@ Sphere::Sphere() :
+     Center(0.0, 0.0, 0.0),
+     Radius(1.0),
+     Do_Ellipsoid(false)
+-{}
++{
++	IsBaseObject = false;
++}
+ 
+ /*****************************************************************************
+ *
+@@ -780,4 +782,14 @@ bool Sphere::Intersect_BBox(BBoxDirectio
+     return true;
+ }
+ 
++void Sphere::Dump(FILE* df, TraceThreadData* Thread) const
++{
++	if (df) {
++		DUMPTAG(df, "SPHR");
++		ObjectBase::Dump(df, Thread);
++		DUMP(df, Center);
++		DUMP(df, Radius);
++	}
++}
++
+ } // end of namespace

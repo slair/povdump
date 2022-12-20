@@ -1,0 +1,20 @@
+--- "povray-3.8.0-beta.2\\source\\core\\shape\\sphere.h"	2021-08-09 05:11:00.000000000 +0400
++++ "povdump-3.8.0-beta.2\\source\\core\\shape\\sphere.h"	2022-12-20 22:56:24.793113900 +0400
+@@ -41,6 +41,8 @@
+ 
+ #include "core/scene/object.h"
+ 
++#include "parser/dump.h"
++
+ namespace pov
+ {
+ 
+@@ -84,6 +86,8 @@ class Sphere : public ObjectBase
+         virtual void Compute_BBox();
+         virtual bool Intersect_BBox(BBoxDirection, const BBoxVector3d&, const BBoxVector3d&, BBoxScalar) const;
+ 
++		virtual void Dump(FILE* df, TraceThreadData* Thread) const;
++
+         static bool Intersect(const BasicRay& ray, const Vector3d& Center, DBL Radius2, DBL *Depth1, DBL  *Depth2);
+ 
+     private:

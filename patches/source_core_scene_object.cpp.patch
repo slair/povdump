@@ -1,5 +1,5 @@
 --- "povray-3.8.0-beta.2\\source\\core\\scene\\object.cpp"	2021-08-09 05:11:00.000000000 +0400
-+++ "povdump-3.8.0-beta.2\\source\\core\\scene\\object.cpp"	2022-12-20 17:39:38.018619700 +0400
++++ "povdump-3.8.0-beta.2\\source\\core\\scene\\object.cpp"	2022-12-20 20:15:22.301559200 +0400
 @@ -933,6 +933,32 @@ bool ObjectBase::IsOpaque() const
             ((Interior_Texture == nullptr) || Test_Opacity(Interior_Texture));
  }
@@ -10,7 +10,7 @@
 +		//~ Log("IsBaseObject = '" + std::to_string(IsBaseObject) + "'");
 +		if (IsBaseObject == true) {
 +			DUMPTAG(df, "BASE");
-+			Log("BASE");
++			Log("  BASE");
 +		}
 +
 +		DUMPTAG(df, "BBOX");
