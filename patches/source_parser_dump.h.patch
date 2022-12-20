@@ -1,8 +1,10 @@
 --- "povray-3.8.0-beta.2\\source\\parser\\dump.h"	1970-01-01 04:00:00.000000000 +0400
-+++ "povdump-3.8.0-beta.2\\source\\parser\\dump.h"	2022-12-18 21:49:47.110849300 +0400
-@@ -0,0 +1,12 @@
++++ "povdump-3.8.0-beta.2\\source\\parser\\dump.h"	2022-12-20 14:53:18.844479900 +0400
+@@ -0,0 +1,14 @@
 +#ifndef POVRAY_PARSER_DUMP_H
 +#define POVRAY_PARSER_DUMP_H
++
++#include <string>
 +
 +#define DUMP(b, a) fwrite(&(a), sizeof(a), 1, (b))
 +#define DUMPTAG(b, a) fwrite(&(a), 4, 1, (b))
