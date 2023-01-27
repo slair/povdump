@@ -38,6 +38,8 @@ fi
 # let's build them
 echo "let's build them"
 
+cd ${MY}
+
 set +u
 if [ -z "$ARCH" ]; then
   case "$( uname -m )" in
