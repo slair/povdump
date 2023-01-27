@@ -22,7 +22,7 @@ if ! [ -d ${MY} ]; then
 		fi
 		7z x ${ORG}.zip
 	fi
-	cp ${ORG} ${MY}
+	cp -r ${ORG} ${MY}
 	. ./apply-patch.sh
 fi
 
