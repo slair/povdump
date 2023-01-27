@@ -14,8 +14,12 @@ PATCHES_DIR=patches
 
 if ! [ -d ${MY} ]; then
 	echo "CREATING NEW ${MY}"
-	sleep 30s
+	sleep 3s
 	if ! [ -d ${ORG} ]; then
+		if ! [ -f ${ORG}.zip ]; then
+			wget -c https://github.com/POV-Ray/povray/archive/refs/tags/v3.8.0-beta.2.zip
+			mv v3.8.0-beta.2.zip ${ORG}.zip
+		fi
 		7z x ${ORG}.zip
 	fi
 	cp ${ORG} ${MY}
