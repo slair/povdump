@@ -4,7 +4,7 @@ ORG=povray-3.8.0-beta.2
 MY=povdump-3.8.0-beta.2
 PATCHES_DIR=patches
 
-for _patch in $(find "${PATCHES_DIR} -type f")
+for _patch in $(find ${PATCHES_DIR} -type f)
 do
   echo "${_patch}"
 done
