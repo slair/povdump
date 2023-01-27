@@ -7,7 +7,8 @@ PATCHES_DIR=patches
 for _patch in $(find ${PATCHES_DIR} -type f)
 do
   echo "Applying ${_patch}"
-  patch -p0 -i "${_patch}"
+  #~ patch -p0 -i "${_patch}"
+  sed -e '/---/s/\\\\/\//g; /+++/s/\\\\/\//g'"${_patch}" | patch -p0
 done
 #set PFN=source\base\build.h
 #call :make_patch
