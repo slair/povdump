@@ -91,4 +91,7 @@ make -s -j2
 cd unix
 mv povray ${BINNAME}
 
+echo "Installing..."
+cp ${BINNAME} ${POVDUMP_BIN_DIR}/
+
 echo "done"
