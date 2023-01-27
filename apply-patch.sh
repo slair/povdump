@@ -4,7 +4,7 @@ ORG=povray-3.8.0-beta.2
 MY=povdump-3.8.0-beta.2
 PATCHES_DIR=patches
 
-for _patch in "${PATCHES_DIR}/*"
+for _patch in $(ls "${PATCHES_DIR}/")
 do
   echo "${_patch}"
 done
