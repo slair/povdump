@@ -23,7 +23,7 @@ if ! [ -d ${MY} ]; then
 		7z x ${ORG}.zip
 	fi
 	. ./apply-patch.sh
-	mv -r ${ORG} ${MY}
+	mv ${ORG} ${MY}
 fi
 
 #~ call make-patch.cmd
