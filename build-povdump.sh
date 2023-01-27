@@ -22,7 +22,12 @@ if ! [ -d ${MY} ]; then
 		fi
 		7z x ${ORG}.zip
 	fi
-	. ./apply-patch.sh
+
+	for _patch in $(find ${PATCHES_DIR} -type f)
+	do
+	  sed -e '/---/s/\\\\/\//g; /+++/s/\\\\/\//g' "${_patch}" | patch -p0
+	done
+
 	mv ${ORG} ${MY}
 fi
 

@@ -17,8 +17,9 @@ if not exist %MY% (
 echo CREATING NEW %MY%
 sleep 30s
 if not exist %ORG% 7z x %ORG%.zip
-copy %ORG% %MY%
-call apply-patch.cmd
+echo call apply-patch.cmd not implemented
+exit
+ren %ORG% %MY%
 )
 
 call make-patch.cmd
