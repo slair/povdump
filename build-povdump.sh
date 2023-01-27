@@ -68,8 +68,11 @@ else
   BINNAME="povdump"
 fi
 
-cd unix
-sh ./prebuild.sh
+set +e
+(
+	cd unix
+	sh ./prebuild.sh
+)
 
 echo "Configuring..."
 CXXFLAGS="${SLKCFLAGS}" \
