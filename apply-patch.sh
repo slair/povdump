@@ -4,9 +4,9 @@ ORG=povray-3.8.0-beta.2
 MY=povdump-3.8.0-beta.2
 PATCHES_DIR=patches
 
-for patch in "${PATCHES_DIR}"/*
+for _patch in "${PATCHES_DIR}"/*
 do
-  echo "${patch}"
+  echo "${_patch}"
 done
 #set PFN=source\base\build.h
 #call :make_patch
