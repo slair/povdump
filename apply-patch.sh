@@ -6,7 +6,8 @@ PATCHES_DIR=patches
 
 for _patch in $(find ${PATCHES_DIR} -type f)
 do
-  echo "${_patch}"
+  echo "Applying ${_patch}"
+  patch -p0 -i "${_patch}"
 done
 #set PFN=source\base\build.h
 #call :make_patch
