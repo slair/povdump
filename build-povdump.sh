@@ -22,8 +22,8 @@ if ! [ -d ${MY} ]; then
 		fi
 		7z x ${ORG}.zip
 	fi
-	cp -r ${ORG} ${MY}
 	. ./apply-patch.sh
+	mv -r ${ORG} ${MY}
 fi
 
 #~ call make-patch.cmd
