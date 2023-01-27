@@ -1,5 +1,5 @@
 --- "povray-3.8.0-beta.2\\source\\parser\\dump.cpp"	1970-01-01 04:00:00.000000000 +0400
-+++ "povdump-3.8.0-beta.2\\source\\parser\\dump.cpp"	2022-12-18 21:48:06.121018000 +0400
++++ "povdump-3.8.0-beta.2\\source\\parser\\dump.cpp"	2023-01-28 02:03:56.474737800 +0400
 @@ -0,0 +1,20 @@
 +#include "parser/dump.h"
 +
@@ -17,7 +17,7 @@
 +    fclose(log);
 +};
 +
-+void Log(string msg) {
++void Log(std::string msg) {
 +	Log((char*) msg.c_str());
 +};
 +

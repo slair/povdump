@@ -1,5 +1,5 @@
 --- "povray-3.8.0-beta.2\\source\\parser\\dump.h"	1970-01-01 04:00:00.000000000 +0400
-+++ "povdump-3.8.0-beta.2\\source\\parser\\dump.h"	2022-12-20 14:53:18.844479900 +0400
++++ "povdump-3.8.0-beta.2\\source\\parser\\dump.h"	2023-01-28 02:03:45.722975200 +0400
 @@ -0,0 +1,14 @@
 +#ifndef POVRAY_PARSER_DUMP_H
 +#define POVRAY_PARSER_DUMP_H
@@ -12,6 +12,6 @@
 +#define SCENE_DUMP_NAME "scene.dump"
 +
 +void Log(const char* msg);
-+void Log(string msg);
++void Log(std::string msg);
 +
 +#endif // POVRAY_PARSER_DUMP_H
