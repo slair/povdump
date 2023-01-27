@@ -66,6 +66,9 @@ else
   BINNAME="povdump"
 fi
 
+cd unix
+sh ./prebuild.sh
+
 echo "Configuring..."
 CXXFLAGS="${SLKCFLAGS}" \
 ./configure \
@@ -80,7 +83,7 @@ COMPILED_BY="${POVRAY_COMPILED_BY}"
 
 echo "Making..."
 make -s -j2
-cd unix
+#~ cd unix
 mv povray ${BINNAME}
 
 echo "done"
