@@ -5,6 +5,9 @@ set ORG=povray-3.8.0-beta.2
 set MY=povdump-3.8.0-beta.2
 set PATCHES_DIR=patches
 
+set PFN=windows\pvengine.cpp
+call :make_patch
+
 set PFN=source\parser\dump.h
 call :make_patch
 
